@@ -1,0 +1,173 @@
+<!-- Tara Moses                 -->
+<!-- Tumblr Theme 4 (I think?)  -->
+<!-- January 6, 2016            -->
+<html>
+    <head>
+        
+        <!--------------------------------->
+        <!--             CSS             -->
+        <!--------------------------------->
+        
+        <style>
+        
+            /* -----------------------------
+            --          .CLASSES          --
+            ------------------------------*/
+            
+            .post {
+                padding: 0px;
+                margin: 0 auto;
+                
+                background-color: blue;
+                max-width: 500px;
+            }
+            
+            /* -----------------------------
+            --          .#IDS            --
+            ------------------------------*/
+            
+            #title_and_description {
+                text-align: center;
+                
+                background-color: green;
+            }
+        </style>
+    </head>
+    
+    <!------------------------------------->
+    <!--      PAGE ELEMENTS (HTML)       -->
+    <!------------------------------------->
+        
+    <body>
+        
+        <!--------------------------------->
+        <!--    TITLE AND DESCRIPTION    -->
+        <!--------------------------------->
+        
+        <div id="title_and_description">
+            <h1 class="blog_title">{Title}</h1>
+            {block:Description}
+                <p class="blog_description">{Description}</p>
+            {/block:Description}
+        </div>
+        
+        <!--------------------------------->
+        <!--         POST TYPES          -->
+        <!--------------------------------->
+        
+        {block:Posts}
+            <!-- 1. Text ------------------>
+            {block:Text}
+                <div class="post text">
+                    {block:Title}
+                        <h3 class="post_title">{Title}</h3>
+                    {/block:Title}
+                    
+                    {Body}
+                </div>
+            {/block:Text}
+            
+            <!-- 2. Photo ----------------->
+            {block:Photo}
+                <div class="post photo">
+                    <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+
+                    {block:Caption}
+                        <div class="photo_caption">{Caption}</div>
+                    {/block:Caption}
+                </div>
+            {/block:Photo}
+            
+            <!-- 3. Panorama -------------->
+            {block:Panorama}
+                <div class="post panorama">
+                    <img src="{PhotoURL-250}" alt="{PhotoAlt}" />
+                
+                    {LinkOpenTag}
+                        <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />
+                    {LinkCloseTag}
+
+                    {block:Caption}
+                        <div class="panorama_caption">{Caption}</div>
+                    {/block:Caption}
+                </div>
+            {/block:Panorama}
+            
+            <!-- 4. Photoset -->
+            {block:Photoset}
+                <div class="post photoset">
+                     {block:Photos}
+                        <div class="post photo">
+                            <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+                        </div>
+                    {/block:Photos}
+    
+                    {block:Caption}
+                        <div class="photoset_caption">{Caption}</div>
+                    {/block:Caption}
+                </div>
+            {/block:Photoset}
+            
+            <!-- 5. Quote -->
+            {block:Quote}
+                <div class="post quote">
+                    {Quote}
+                    
+                    {block:Source}
+                        {Source}
+                    {/block:Source}
+                </div>
+            {/block:Quote}
+            
+            <!-- 6. Link -->
+            {block:Link}
+                <div class="post link">
+                    <a href="{URL}">{Name}</a>
+                    
+                    {block:Description}
+                        <div class="link_description">{Description}</div>
+                    {/block:Description}
+                </div>
+            {/block:Link}
+            
+            <!-- 7. Chat -->
+            {block:Chat}
+                <div class="post chat">
+                    {block:Title}
+                        <div class="post_title">{Title}</div>
+                    {/block:Title}
+                    
+                    {block:Lines}
+                        <div class="{Alt} user_{UserNumber}">
+                            {block:Label}
+                                <div class="label">{Label}</div>
+                            {/block:Label}{Line}
+                        </div>
+                    {/block:Lines}
+                </div>
+            {/block:Chat}
+            
+            <!-- 8. Video -->
+            {block:Video}
+                <div class="post video">
+                    {Video-500}
+                    
+                    {block:Caption}
+                        <div class="video_caption">{Caption}</div>
+                    {/block:Caption}
+                </div>
+            {/block:Video}
+            
+            <!-- 9. Audio -->
+            {block:Audio}
+                <div class="post audio">
+                    {AudioEmbed}
+                    
+                    {block:Caption}
+                        <div class="video_caption">{Caption}</div>
+                    {/block:Caption}
+                </div>
+            {/block:Audio}
+        {/block:Posts}
+    </body>
+</html>
