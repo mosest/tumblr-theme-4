@@ -1,14 +1,26 @@
-<!-- Tara Moses                 -->
-<!-- Tumblr Theme 4 (I think?)  -->
-<!-- January 6, 2016            -->
+<!-- Tara Moses                          -->
+<!-- Tumblr Theme 4 (I think?)           -->
+<!-- January 6, 2016                     -->
 <html>
     <head>
+        
+        <!--------------------------------->
+        <!--   JavaScript/jQuery assets  -->
+        <!--------------------------------->
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+        <script src="http://static.tumblr.com/ubunpdk/jL8o0kmgk/jquery.infinitescroll.min.js"></script>
         
         <!--------------------------------->
         <!--             CSS             -->
         <!--------------------------------->
         
         <style>
+        
+            html {
+                padding: 0;
+                margin: 0;
+            }
         
             /* -----------------------------
             --          .CLASSES          --
@@ -23,7 +35,7 @@
             }
             
             /* -----------------------------
-            --          .#IDS            --
+            --            .#IDS           --
             ------------------------------*/
             
             #title_and_description {
@@ -44,6 +56,7 @@
         <!--    TITLE AND DESCRIPTION    -->
         <!--------------------------------->
         
+        <img id="avatar" src="{PortraitURL-128}" \>
         <div id="title_and_description">
             <h1 class="blog_title">{Title}</h1>
             {block:Description}
@@ -55,119 +68,163 @@
         <!--         POST TYPES          -->
         <!--------------------------------->
         
-        {block:Posts}
-            <!-- 1. Text ------------------>
-            {block:Text}
-                <div class="post text">
-                    {block:Title}
-                        <h3 class="post_title">{Title}</h3>
-                    {/block:Title}
-                    
-                    {Body}
-                </div>
-            {/block:Text}
-            
-            <!-- 2. Photo ----------------->
-            {block:Photo}
-                <div class="post photo">
-                    <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
-
-                    {block:Caption}
-                        <div class="photo_caption">{Caption}</div>
-                    {/block:Caption}
-                </div>
-            {/block:Photo}
-            
-            <!-- 3. Panorama -------------->
-            {block:Panorama}
-                <div class="post panorama">
-                    <img src="{PhotoURL-250}" alt="{PhotoAlt}" />
+        <div id="container">
+            {block:Posts}
+                <!-- 1. Text ------------------>
+                {block:Text}
+                    <div class="post text">
+                        {block:Title}
+                            <h3 class="post_title">{Title}</h3>
+                        {/block:Title}
+                        
+                        {Body}
+                    </div>
+                {/block:Text}
                 
-                    {LinkOpenTag}
-                        <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />
-                    {LinkCloseTag}
-
-                    {block:Caption}
-                        <div class="panorama_caption">{Caption}</div>
-                    {/block:Caption}
-                </div>
-            {/block:Panorama}
-            
-            <!-- 4. Photoset -->
-            {block:Photoset}
-                <div class="post photoset">
-                     {block:Photos}
-                        <div class="post photo">
-                            <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
-                        </div>
-                    {/block:Photos}
+                <!-- 2. Photo ----------------->
+                {block:Photo}
+                    <div class="post photo">
+                        <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
     
-                    {block:Caption}
-                        <div class="photoset_caption">{Caption}</div>
-                    {/block:Caption}
-                </div>
-            {/block:Photoset}
-            
-            <!-- 5. Quote -->
-            {block:Quote}
-                <div class="post quote">
-                    {Quote}
+                        {block:Caption}
+                            <div class="photo_caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Photo}
+                
+                <!-- 3. Panorama -------------->
+                {block:Panorama}
+                    <div class="post panorama">
+                        <img src="{PhotoURL-250}" alt="{PhotoAlt}" />
                     
-                    {block:Source}
-                        {Source}
-                    {/block:Source}
-                </div>
-            {/block:Quote}
+                        {LinkOpenTag}
+                            <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />
+                        {LinkCloseTag}
+    
+                        {block:Caption}
+                            <div class="panorama_caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Panorama}
+                
+                <!-- 4. Photoset -------------->
+                {block:Photoset}
+                    <div class="post photoset">
+                         {block:Photos}
+                            <div class="post photo">
+                                <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
+                            </div>
+                        {/block:Photos}
+        
+                        {block:Caption}
+                            <div class="photoset_caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Photoset}
+                
+                <!-- 5. Quote ----------------->
+                {block:Quote}
+                    <div class="post quote">
+                        {Quote}
+                        
+                        {block:Source}
+                            {Source}
+                        {/block:Source}
+                    </div>
+                {/block:Quote}
+                
+                <!-- 6. Link ------------------>
+                {block:Link}
+                    <div class="post link">
+                        <a href="{URL}">{Name}</a>
+                        
+                        {block:Description}
+                            <div class="link_description">{Description}</div>
+                        {/block:Description}
+                    </div>
+                {/block:Link}
+                
+                <!-- 7. Chat ------------------>
+                {block:Chat}
+                    <div class="post chat">
+                        {block:Title}
+                            <div class="post_title">{Title}</div>
+                        {/block:Title}
+                        
+                        {block:Lines}
+                            <div class="{Alt} user_{UserNumber}">
+                                {block:Label}
+                                    <div class="label">{Label}</div>
+                                {/block:Label}{Line}
+                            </div>
+                        {/block:Lines}
+                    </div>
+                {/block:Chat}
+                
+                <!-- 8. Video ----------------->
+                {block:Video}
+                    <div class="post video">
+                        {Video-500}
+                        
+                        {block:Caption}
+                            <div class="video_caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Video}
+                
+                <!-- 9. Audio ----------------->
+                {block:Audio}
+                    <div class="post audio">
+                        {AudioEmbed}
+                        
+                        {block:Caption}
+                            <div class="video_caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Audio}
+            {/block:Posts}
+        </div> <!-- end of container -->
+        
+        <!--------------------------------->
+        <!--         PAGINATION          -->
+        <!--------------------------------->
+        
+        {block:Pagination}
+            <div id="pagination">
+                {block:PreviousPage}
+                    <a id="prev" href="{PreviousPage}">Prev</a>
+                {/block:PreviousPage}
+                
+                {block:NextPage}
+                    <a id="next" href="{NextPage}">Next</a>
+                {/block:NextPage}
+            </div>
+        {/block:Pagination}
+        
+        <!--------------------------------->
+        <!--         JAVASCRIPT          -->
+        <!--------------------------------->
+        
+        <script>
+        
+            // Let's get Infinite Scroll working
+            // (without Masonry in the way >:3)
             
-            <!-- 6. Link -->
-            {block:Link}
-                <div class="post link">
-                    <a href="{URL}">{Name}</a>
-                    
-                    {block:Description}
-                        <div class="link_description">{Description}</div>
-                    {/block:Description}
-                </div>
-            {/block:Link}
+            $('#container').infinitescroll({
+                navSelector  : "#pagination",           // the thing that holds your 
+                                                        // prev/next buttons
+                nextSelector : "#pagination #next",     // the thing that gets your next posts
             
-            <!-- 7. Chat -->
-            {block:Chat}
-                <div class="post chat">
-                    {block:Title}
-                        <div class="post_title">{Title}</div>
-                    {/block:Title}
-                    
-                    {block:Lines}
-                        <div class="{Alt} user_{UserNumber}">
-                            {block:Label}
-                                <div class="label">{Label}</div>
-                            {/block:Label}{Line}
-                        </div>
-                    {/block:Lines}
-                </div>
-            {/block:Chat}
+                itemSelector : "#container .post"       // the things you want to get more of (posts)
+              });
             
-            <!-- 8. Video -->
-            {block:Video}
-                <div class="post video">
-                    {Video-500}
-                    
-                    {block:Caption}
-                        <div class="video_caption">{Caption}</div>
-                    {/block:Caption}
-                </div>
-            {/block:Video}
-            
-            <!-- 9. Audio -->
-            {block:Audio}
-                <div class="post audio">
-                    {AudioEmbed}
-                    
-                    {block:Caption}
-                        <div class="video_caption">{Caption}</div>
-                    {/block:Caption}
-                </div>
-            {/block:Audio}
-        {/block:Posts}
+        </script>
     </body>
 </html>
+
+
+
+
+
+
+
