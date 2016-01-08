@@ -17,7 +17,7 @@
         
         <style>
         
-            html {
+            body {
                 padding: 0;
                 margin: 0;
             }
@@ -27,21 +27,57 @@
             ------------------------------*/
             
             .post {
-                padding: 0px;
-                margin: 0 auto;
-                
                 background-color: blue;
                 max-width: 500px;
+                padding: 0px;
             }
             
             /* -----------------------------
-            --            .#IDS           --
+            --            #IDS           ---
             ------------------------------*/
             
-            #title_and_description {
+            /* - The Two Biggest Blocks - */
+            
+            #left_box {
+                /* how it looks */
                 text-align: center;
-                
                 background-color: green;
+               
+                /* where it goes */
+                overflow: hidden; /* take up all space that right_box isn't using?? */
+            }
+            
+            #right_box {
+                /* how it looks */
+                background-color: white;
+                
+                /* how it acts */
+                float: right; 
+                width: 50%;
+            }
+            
+            /* ----- other pieces ---- */
+            
+            #blog_title {
+                font: {TitleFont}; /* this only loads for mobile */
+            }
+            
+            #title_avatar_description {
+                height: 500px;
+                width: 300px;
+                background-color: purple;
+                
+                position: fixed;
+                top: 50%;
+                margin-top: -250px;
+                left: 25%;
+                margin-left: -150px;
+            }
+            
+            #pagination {
+                background-color: orange;
+                
+                clear: both;
             }
         </style>
     </head>
@@ -56,19 +92,21 @@
         <!--    TITLE AND DESCRIPTION    -->
         <!--------------------------------->
         
-        <img id="avatar" src="{PortraitURL-128}" \>
-        <div id="title_and_description">
-            <h1 class="blog_title">{Title}</h1>
-            {block:Description}
-                <p class="blog_description">{Description}</p>
-            {/block:Description}
+        <div id="left_box">
+            <div id="title_avatar_description">
+                <img id="avatar" src="{PortraitURL-128}" \>
+                <h1 id="blog_title">{Title}</h1>
+                {block:Description}
+                    <p id="blog_description">{Description}</p>
+                {/block:Description}
+            </div>
         </div>
         
         <!--------------------------------->
         <!--         POST TYPES          -->
         <!--------------------------------->
         
-        <div id="container">
+        <div id="right_box">
             {block:Posts}
                 <!-- 1. Text ------------------>
                 {block:Text}
@@ -210,12 +248,12 @@
             // Let's get Infinite Scroll working
             // (without Masonry in the way >:3)
             
-            $('#container').infinitescroll({
+            $('#right_box').infinitescroll({
                 navSelector  : "#pagination",           // the thing that holds your 
                                                         // prev/next buttons
                 nextSelector : "#pagination #next",     // the thing that gets your next posts
             
-                itemSelector : "#container .post"       // the things you want to get more of (posts)
+                itemSelector : "#right_box .post"       // the things you want to get more of (posts)
               });
             
         </script>
