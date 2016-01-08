@@ -28,7 +28,6 @@
             
             .post {
                 background-color: blue;
-                max-width: 500px;
                 padding: 0px;
             }
             
@@ -42,18 +41,18 @@
                 /* how it looks */
                 text-align: center;
                 background-color: green;
-               
-                /* where it goes */
-                overflow: hidden; /* take up all space that right_box isn't using?? */
+                width: 500px;
+                
+                float: left;
             }
             
             #right_box {
                 /* how it looks */
-                background-color: white;
+                background-color: red;
                 
-                /* how it acts */
-                float: right; 
-                width: 50%;
+                /* where it goes */
+                margin-right: 100px;
+                overflow: hidden;
             }
             
             /* ----- other pieces ---- */
@@ -70,8 +69,7 @@
                 position: fixed;
                 top: 50%;
                 margin-top: -250px;
-                left: 25%;
-                margin-left: -150px;
+                left: 100px;
             }
             
             #pagination {
@@ -93,6 +91,7 @@
         <!--------------------------------->
         
         <div id="left_box">
+            <br />
             <div id="title_avatar_description">
                 <img id="avatar" src="{PortraitURL-128}" \>
                 <h1 id="blog_title">{Title}</h1>
