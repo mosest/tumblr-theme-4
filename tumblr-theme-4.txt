@@ -37,11 +37,23 @@
                 color: gray;
             }
         
-            /* -----------------------------
+            /*------------------------------
             --            POSTS           --
             ------------------------------*/
             
-            #reblog {
+            .post {
+                background-color: white;
+                max-width: 500px;
+                border: 1px solid gray;
+                border-radius: 10px;
+                
+                padding: 0;
+                margin: 15px auto 0 auto;
+            }
+            
+            /* -- Reblog/Like Bar ------- */
+            
+            .reblog_like_bar {
                 border-bottom: 1px dashed gray;
                 padding: 8px;
             }
@@ -53,16 +65,25 @@
             #reblog_name {
                 margin-left: 4px; /* the name was too close to the avatar */
             }
-                
-            .post {
-                background-color: white;
-                max-width: 500px;
-                border: 1px solid gray;
-                border-radius: 10px;
-                
-                padding: 0;
-                margin: 15px auto 0 auto;
+            
+            #like_button {
+                float: right;
+                margin: 0 0 5px 8px;
             }
+            
+            #reblog_button {
+                float: right;
+                margin: 0 0 5px 8px;
+            }
+            
+            #notes {
+                float: right;
+                color: gray;
+                font-weight: bold;
+                margin-bottom: 3px;
+            }
+            
+            /* -- Body ----------------- */
             
             .post_body {
                 margin: 2px 2px 20px 15px;
@@ -72,6 +93,17 @@
                 padding: 0 15px; /* distance between border-left and the actual words */
                 margin: -6px 13px 0 13px; /* distance from border-left to the edge of the post box */
                 border-left: 3px solid #eee;
+            }
+            
+            /* -- Tags ---------------- */
+            
+            .tags {
+                padding: 0 8px 10px 8px;
+                color: gray;
+            }
+            
+            #individual_tag {
+                margin: 0 0 0 8px;
             }
             
             /* -----------------------------
@@ -165,9 +197,18 @@
                 {block:Text}
                     <div class="post text">
                         {block:RebloggedFrom}
-                            <div id="reblog">
+                            <div class="reblog_like_bar">
                                 <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
                                 <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                                
+                                <div id="reblog_button">{ReblogButton}</div>
+                                <div id="like_button">{LikeButton}</div>
+                                
+                                {block:NoteCount}
+                                    <div id="notes">
+                                        {NoteCount}
+                                    </div>
+                                {/block:NoteCount}
                             </div>
                         {/block:RebloggedFrom}
                         
@@ -178,6 +219,16 @@
                             
                             {Body}
                         </div>
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Text}
                 
