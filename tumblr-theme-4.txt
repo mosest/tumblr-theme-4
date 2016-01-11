@@ -12,6 +12,12 @@
         <script src="http://static.tumblr.com/ubunpdk/jL8o0kmgk/jquery.infinitescroll.min.js"></script>
         
         <!--------------------------------->
+        <!--            Fonts            -->
+        <!--------------------------------->
+        
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        
+        <!--------------------------------->
         <!--             CSS             -->
         <!--------------------------------->
         
@@ -20,29 +26,38 @@
             body {
                 padding: 0;
                 margin: 0;
+                background: url("http://static.tumblr.com/ubunpdk/D2Oo0ryxj/corypls.jpg");
+                
+                font-family: "Arial", sans-serif;
+                font-size: 14px;
+            }
+            
+            a {
+                text-decoration: none;
+                color: gray;
             }
         
             /* -----------------------------
-            --          .CLASSES          --
+            --            POSTS           --
             ------------------------------*/
             
             .post {
-                background-color: blue;
+                background-color: white;
                 max-width: 500px;
-                padding: 0px;
-                margin: 0 auto;
+                border: 1px solid gray;
+                border-radius: 10px;
+                
+                padding: 0;
+                margin: 10px auto 0 auto;
             }
             
             /* -----------------------------
-            --            #IDS           ---
+            -- LAYOUT (LEFT/RIGHT BLOCKS) --
             ------------------------------*/
-            
-            /* - The Two Biggest Blocks - */
             
             #left_box {
                 /* how it looks */
                 text-align: center;
-                background-color: green;
                 width: 500px;
                 
                 float: left;
@@ -50,29 +65,42 @@
             
             #right_box {
                 /* how it looks */
-                background-color: red;
                 
                 /* where it goes */
                 margin-right: 100px;
                 overflow: hidden;
             }
             
-            /* ----- other pieces ---- */
+            /* -----------------------------
+            --  TITLE/AVATAR/DESCRIPTION  --
+            ------------------------------*/
+            
+            #avatar {
+                border-radius: 100%;
+            }
             
             #blog_title {
-                font: {TitleFont}; /* this only loads for mobile */
+                font-family: "Lato", sans-serif;
             }
             
             #title_avatar_description {
-                height: 500px;
+                /* how it looks */
                 width: 300px;
-                background-color: purple;
+                border: 1px solid gray;
+                border-radius: 10px;
+                background: white;
+                padding: 30px 10px;
                 
+                /* where it goes */
                 position: fixed;
                 top: 50%;
                 margin-top: -250px;
                 left: 100px;
             }
+            
+            /* -----------------------------
+            --         PAGINATION         --
+            ------------------------------*/
             
             #pagination {
                 background-color: orange;
