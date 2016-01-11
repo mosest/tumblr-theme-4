@@ -41,6 +41,19 @@
             --            POSTS           --
             ------------------------------*/
             
+            #reblog {
+                border-bottom: 1px dashed gray;
+                padding: 8px;
+            }
+            
+            #reblog_avatar {
+                border-radius: 4px;
+            }
+            
+            #reblog_name {
+                margin-left: 4px; /* the name was too close to the avatar */
+            }
+                
             .post {
                 background-color: white;
                 max-width: 500px;
@@ -48,7 +61,17 @@
                 border-radius: 10px;
                 
                 padding: 0;
-                margin: 10px auto 0 auto;
+                margin: 15px auto 0 auto;
+            }
+            
+            .post_body {
+                margin: 2px 2px 20px 15px;
+            }
+            
+            .post_body blockquote { /* the actual words of the text post */
+                padding: 0 15px; /* distance between border-left and the actual words */
+                margin: -6px 13px 0 13px; /* distance from border-left to the edge of the post box */
+                border-left: 3px solid #eee;
             }
             
             /* -----------------------------
@@ -65,6 +88,7 @@
             
             #right_box {
                 /* how it looks */
+                padding: 10px 0;
                 
                 /* where it goes */
                 margin-right: 100px;
@@ -140,11 +164,20 @@
                 <!-- 1. Text ------------------>
                 {block:Text}
                     <div class="post text">
-                        {block:Title}
-                            <h3 class="post_title">{Title}</h3>
-                        {/block:Title}
+                        {block:RebloggedFrom}
+                            <div id="reblog">
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            </div>
+                        {/block:RebloggedFrom}
                         
-                        {Body}
+                        <div class="post_body">
+                            {block:Title}
+                                <h2 class="post_title">{Title}</h2>
+                            {/block:Title}
+                            
+                            {Body}
+                        </div>
                     </div>
                 {/block:Text}
                 
