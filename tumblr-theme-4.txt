@@ -1,6 +1,7 @@
 <!-- Tara Moses                          -->
 <!-- Tumblr Theme 4 (I think?)           -->
 <!-- January 6, 2016                     -->
+
 <html>
     <head>
         
@@ -26,7 +27,8 @@
             body {
                 padding: 0;
                 margin: 0;
-                background: url("http://static.tumblr.com/ubunpdk/D2Oo0ryxj/corypls.jpg");
+                background: #e5f2ff;
+                background-attachment: fixed;
                 
                 font-family: "Arial", sans-serif;
                 font-size: 14px;
@@ -48,14 +50,19 @@
                 border-radius: 10px;
                 
                 padding: 0;
-                margin: 15px auto 0 auto;
+                margin-top: 15px;
             }
             
             /* -- Reblog/Like Bar ------- */
             
             .reblog_like_bar {
-                border-bottom: 1px dashed gray;
+                height: 20px;
+                border-bottom: 1px solid #eee;
                 padding: 8px;
+            }
+            
+            .media_border {
+                border-bottom: none;
             }
             
             #reblog_avatar {
@@ -95,15 +102,50 @@
                 border-left: 3px solid #eee;
             }
             
+            .photo {
+                margin: 0 auto;
+            }
+            
+            .chat_lines {
+                margin-top: 20px;
+                font-family: "Lucida Console", serif;
+                line-height: 130%;
+            } 
+            
+            .chat_label {
+                font-weight: bold;
+            }
+            
+            .link_post #link_box {
+                text-align: center;
+                padding: 15px;
+                background-color: #9999ff;
+            }
+            
+            #link {
+                color: black;
+            }
+            
+            #quote {
+                font-size: 50px;
+                font-family: "Georgia", serif;
+                margin: 15px;
+            }
+            
+            #quote_source {
+                margin-left: 20px;
+            }
+            
             /* -- Tags ---------------- */
             
             .tags {
-                padding: 0 8px 10px 8px;
+                padding: 15px;
                 color: gray;
             }
             
             #individual_tag {
-                margin: 0 0 0 8px;
+                margin: 0 15px 0 0;
+                line-height: 140%;
             }
             
             /* -----------------------------
@@ -113,18 +155,28 @@
             #left_box {
                 /* how it looks */
                 text-align: center;
-                width: 500px;
+                width: 322px;
+                height: 100%;
+                margin-right: 40px;
+                margin-left: 40px;
                 
                 float: left;
+                position: fixed;
+            }
+            
+            #extra_parent { /* only here because left_box is fixed but i need a parent to be relative */
+                position: relative;
+                height: calc(100%);
             }
             
             #right_box {
                 /* how it looks */
                 padding: 10px 0;
+                width: calc(100% - 80px - 322px - 40px);
+                margin-right: 40px;
                 
                 /* where it goes */
-                margin-right: 100px;
-                overflow: hidden;
+                float: right;
             }
             
             /* -----------------------------
@@ -142,16 +194,16 @@
             #title_avatar_description {
                 /* how it looks */
                 width: 300px;
+                margin: auto 0;
                 border: 1px solid gray;
                 border-radius: 10px;
                 background: white;
                 padding: 30px 10px;
                 
                 /* where it goes */
-                position: fixed;
+                position: absolute;
                 top: 50%;
-                margin-top: -250px;
-                left: 100px;
+                transform: translateY(-50%);
             }
             
             /* -----------------------------
@@ -177,7 +229,7 @@
         <!--------------------------------->
         
         <div id="left_box">
-            <br />
+        <div id="extra_parent">
             <div id="title_avatar_description">
                 <img id="avatar" src="{PortraitURL-128}" \>
                 <h1 id="blog_title">{Title}</h1>
@@ -185,6 +237,7 @@
                     <p id="blog_description">{Description}</p>
                 {/block:Description}
             </div>
+        </div>
         </div>
         
         <!--------------------------------->
@@ -195,22 +248,22 @@
             {block:Posts}
                 <!-- 1. Text ------------------>
                 {block:Text}
-                    <div class="post text">
-                        {block:RebloggedFrom}
-                            <div class="reblog_like_bar">
+                    <div class="post text_post">
+                        <div class="reblog_like_bar">
+                            {block:RebloggedFrom}
                                 <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
                                 <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
-                                
-                                <div id="reblog_button">{ReblogButton}</div>
-                                <div id="like_button">{LikeButton}</div>
-                                
-                                {block:NoteCount}
-                                    <div id="notes">
-                                        {NoteCount}
-                                    </div>
-                                {/block:NoteCount}
-                            </div>
-                        {/block:RebloggedFrom}
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
                         
                         <div class="post_body">
                             {block:Title}
@@ -234,108 +287,324 @@
                 
                 <!-- 2. Photo ----------------->
                 {block:Photo}
-                    <div class="post photo">
-                        <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
-    
+                    <div class="post photo_post">
+                        <div class="reblog_like_bar media_border">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
+                        
+                        <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" />
+                        
                         {block:Caption}
-                            <div class="photo_caption">{Caption}</div>
+                            <div class="photo_caption post_body">{Caption}</div>
                         {/block:Caption}
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Photo}
                 
                 <!-- 3. Panorama -------------->
                 {block:Panorama}
-                    <div class="post panorama">
-                        <img src="{PhotoURL-250}" alt="{PhotoAlt}" />
+                    <div class="post panorama_post">
+                        <div class="reblog_like_bar media_border">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
+                        
+                        <img class="photo" src="{PhotoURL-250}" alt="{PhotoAlt}" />
                     
                         {LinkOpenTag}
                             <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />
                         {LinkCloseTag}
-    
+                        
                         {block:Caption}
-                            <div class="panorama_caption">{Caption}</div>
+                            <div class="panorama_caption post_body">{Caption}</div>
                         {/block:Caption}
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Panorama}
                 
                 <!-- 4. Photoset -------------->
                 {block:Photoset}
-                    <div class="post photoset">
+                    <div class="post photoset_post">
+                        <div class="reblog_like_bar media_border">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
+                        
                          {block:Photos}
-                            <div class="post photo">
-                                <img src="{PhotoURL-500}" alt="{PhotoAlt}" />
-                            </div>
+                            <img class="photo" src="{PhotoURL-500}" alt="{PhotoAlt}" />
                         {/block:Photos}
         
                         {block:Caption}
-                            <div class="photoset_caption">{Caption}</div>
+                            <div class="photoset_caption post_body">{Caption}</div>
                         {/block:Caption}
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Photoset}
                 
                 <!-- 5. Quote ----------------->
                 {block:Quote}
-                    <div class="post quote">
-                        {Quote}
+                    <div class="post quote_post">
+                        <div class="reblog_like_bar">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
                         
-                        {block:Source}
-                            {Source}
-                        {/block:Source}
+                        <div class="post_body">
+                            <div id="quote">"{Quote}"</div>
+                            
+                            {block:Source}
+                                <div id="quote_source">
+                                    — {Source}
+                                </div>
+                            {/block:Source}
+                        </div>
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Quote}
                 
                 <!-- 6. Link ------------------>
                 {block:Link}
-                    <div class="post link">
-                        <a href="{URL}">{Name}</a>
+                    <div class="post link_post">
+                        <div class="reblog_like_bar media_border">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
+                        
+                        <div id="link_box">
+                            <h2><a id="link" href="{URL}">{Name}</a></h2>
+                        </div>
                         
                         {block:Description}
-                            <div class="link_description">{Description}</div>
+                            <div class="link_description post_body">{Description}</div>
                         {/block:Description}
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Link}
                 
                 <!-- 7. Chat ------------------>
                 {block:Chat}
-                    <div class="post chat">
-                        {block:Title}
-                            <div class="post_title">{Title}</div>
-                        {/block:Title}
+                    <div class="post chat_post">
+                        <div class="reblog_like_bar">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
                         
-                        {block:Lines}
-                            <div class="{Alt} user_{UserNumber}">
-                                {block:Label}
-                                    <div class="label">{Label}</div>
-                                {/block:Label}{Line}
+                        <div class="post_body">
+                            {block:Title}
+                                <h2 class="post_title">{Title}</h2>
+                            {/block:Title}
+                            
+                            {block:Lines}
+                                <div class="chat_lines {Alt} user_{UserNumber}">
+                                    {block:Label}
+                                        <span class="chat_label">{Label}</span>
+                                    {/block:Label}
+                                    
+                                    {Line}
+                                </div>
+                            {/block:Lines}
+                        </div>
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
                             </div>
-                        {/block:Lines}
+                        {/block:HasTags}
                     </div>
                 {/block:Chat}
                 
                 <!-- 8. Video ----------------->
                 {block:Video}
-                    <div class="post video">
+                    <div class="post video_post">
+                        <div class="reblog_like_bar media_border">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
+                        
                         {Video-500}
                         
                         {block:Caption}
-                            <div class="video_caption">{Caption}</div>
+                            <div class="video_caption post_body">{Caption}</div>
                         {/block:Caption}
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Video}
                 
                 <!-- 9. Audio ----------------->
                 {block:Audio}
-                    <div class="post audio">
+                    <div class="post audio_post">
+                        <div class="reblog_like_bar media_border">
+                            {block:RebloggedFrom}
+                                <img id="reblog_avatar" src="{ReblogParentPortraitURL-16}" />
+                                <a id="reblog_name" href="{ReblogParentURL}">{ReblogParentName}</a>
+                            {/block:RebloggedFrom}
+                            
+                            <div id="reblog_button">{ReblogButton}</div>
+                            <div id="like_button">{LikeButton}</div>
+                            
+                            {block:NoteCount}
+                                <div id="notes">
+                                    {NoteCount}
+                                </div>
+                            {/block:NoteCount}
+                        </div>
+                        
                         {AudioEmbed}
                         
                         {block:Caption}
-                            <div class="video_caption">{Caption}</div>
+                            <div class="video_caption post_body">{Caption}</div>
                         {/block:Caption}
+                        
+                        {block:HasTags}
+                            <div class="tags">
+                                {block:Tags}
+                                    <span id="individual_tag">
+                                        #{Tag}
+                                    </span>
+                                {/block:Tags}
+                            </div>
+                        {/block:HasTags}
                     </div>
                 {/block:Audio}
             {/block:Posts}
         </div> <!-- end of container -->
-        
+            
         <!--------------------------------->
         <!--         PAGINATION          -->
         <!--------------------------------->
